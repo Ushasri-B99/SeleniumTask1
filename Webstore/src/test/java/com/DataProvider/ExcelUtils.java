@@ -1,5 +1,8 @@
 package com.DataProvider;
 
+import java.io.File;
+import java.io.FileInputStream;
+
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -10,8 +13,12 @@ public class ExcelUtils {
 	
 	public ExcelUtils(String excelPath) {
 		try {
+			//String filePath = "C:\ExcelSheet\Excel Sheet.xlsx"; 
+			File file = new File(excelPath); 
+			FileInputStream fis = new FileInputStream(file); 
+			//XSSFWorkbook wb = new XSSFWorkbook(fis); 
 			
-			wb = new XSSFWorkbook(excelPath);			
+			wb = new XSSFWorkbook(fis);			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -22,6 +29,7 @@ public class ExcelUtils {
 		try {
 			int rowCount = sheet.getPhysicalNumberOfRows();
 			System.out.println("No of rows: "+ rowCount);
+			wb.close();
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
@@ -33,7 +41,8 @@ public class ExcelUtils {
 		String  cellData = null ;
 		try {
 			cellData = wb.getSheet(sheetName).getRow(rowNum).getCell(colNum).toString();
-			//cellData = wb.getSheet(sheetName).getRow(rowNum).getCell(colNum).getStringCellValue();			
+			//cellData = wb.getSheet(sheetName).getRow(rowNum).getCell(colNum).getStringCellValue();
+			wb.close();
 			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -48,7 +57,7 @@ public class ExcelUtils {
 		try {
 			//String  cellData = sheet.getRow(rowNum).getCell(colNum).toString();
 			cellData = wb.getSheet(sheetName).getRow(rowNum).getCell(colNum).getStringCellValue();			
-			
+			wb.close();
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
@@ -62,7 +71,7 @@ public class ExcelUtils {
 		try {
 			//String  cellData = sheet.getRow(rowNum).getCell(colNum).toString();
 			 cellData = wb.getSheet(sheetName).getRow(rowNum).getCell(colNum).getNumericCellValue();		
-			
+			 wb.close();
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());

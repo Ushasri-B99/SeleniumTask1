@@ -20,8 +20,8 @@ public class BaseTest {
 	
 	@BeforeTest
 	public void setup() {
-		WebDriverManager.firefoxdriver().setup();
-		driver = new FirefoxDriver();
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
 		driver.get("http://demowebshop.tricentis.com/");
 		driver.manage().window().maximize();
 	
